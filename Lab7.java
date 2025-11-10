@@ -3,17 +3,17 @@ class Printer {
     private boolean isPrinting = false; // Flag to check if printer is busy
 
 
-    // synchronized ensures only one user can access the printer at a time
+    
 
     synchronized void printDocument(String user, String documentName) {
 
-        while (isPrinting) { // if printer is busy, wait
+        while (isPrinting) {
 
             try {
 
                 System.out.println(user + " is waiting for the printer...");
 
-                wait(); // wait until notified
+                wait();
 
             } catch (InterruptedException e) {
 
@@ -24,7 +24,7 @@ class Printer {
         }
 
 
-        // Printer becomes busy now
+      
 
         isPrinting = true;
 
@@ -79,7 +79,7 @@ class User implements Runnable {
 
         int docCount = 1;
 
-        while (running && docCount <= 3) { // Each user prints 3 documents
+        while (running && docCount <= 3) { 
 
             String docName = "Document_" + docCount;
 
@@ -90,7 +90,7 @@ class User implements Runnable {
 
             try {
 
-                Thread.sleep(500); // wait before sending next print
+                Thread.sleep(500); 
 
             } catch (InterruptedException e) {}
 
@@ -103,7 +103,7 @@ class User implements Runnable {
 
     public void stopUser() {
 
-        running = false; // safely stop user thread
+        running = false; 
 
     }
 
@@ -126,7 +126,7 @@ public class Lab7 {
         Thread user3 = new Thread(new User("User3", sharedPrinter));
 
 
-        // Display thread states before starting
+        
 
         System.out.println("Before start: " + user1.getName() + " state = " + user1.getState());
 
@@ -141,7 +141,7 @@ public class Lab7 {
         Thread.sleep(2000);
 
 
-        // Display thread states during execution
+       
 
         System.out.println("\nDuring execution:");
 
@@ -152,7 +152,7 @@ public class Lab7 {
         System.out.println(user3.getName() + " state = " + user3.getState());
 
 
-        // Wait for users to finish
+       
 
         user1.join();
 
@@ -173,5 +173,6 @@ public class Lab7 {
         System.out.println("\nMain thread exiting...");
 
     }
+
 
 }
